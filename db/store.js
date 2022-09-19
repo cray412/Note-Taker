@@ -1,31 +1,44 @@
 const util = require('util');
 const { v4: uuidv4 } = require('uuid');
 const fs = require('fs');
-const readFileAsync = util.promisify.apply(fs.readFile);
-const writeFileAsync = util.promisify.apply(fs.writeFile);
+let dbData = require('./db.json');
+// const readFileSync = util.promisify(fs.readFile);
+// const writeFileAsync = util.promisify(fs.writeFile);
 
 
 class Store {
 
     read() {
-        return readFileAsync('db/db.json', 'utf8');
+        console.log(JSON.parse(dbData).push("data"));
+        fs.readFileSync(dbData, 'utf8', function(error, data) {
+            if (error) throw error
+            console.log(JSON.parse(data));
+            console.log(typeof(JSON.parse(data)));
+        });
     }
 
 
-    write() {
-    return writeFileAsync('db/db.json' JSON.stringify(notes)
+    write(notes) {
+        return writeFileAsync('db/db.json', JSON.stringify(notes));
     }
 
-    getNotes()
+
+    // getNotes() {
+    //     return
+    // }
 
 
-    addNotes()
+    // addNotes() {
+    //     return
+    // }
 
 
-    deleteNotes()
+    deleteNotes() {
+        return
+    }
 
 
 
 }
 
-export.modules()
+module.exports = Store;
